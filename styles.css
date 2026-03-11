@@ -11,17 +11,19 @@
 }
 
 :root {
-    --color-bg: #121212;
-    --color-surface: #1e1e1e;
-    --color-surface-hover: #252525;
-    --color-primary: #4ade80;
-    --color-primary-hover: #22c55e;
-    --color-text: #e0e0e0;
-    --color-text-muted: #888;
-    --color-text-dim: #666;
-    --color-border: #333;
-    --color-error: #ef4444;
-    --color-warning: #f59e0b;
+    --color-bg: #0a0a0a;
+    --color-surface: #141414;
+    --color-surface-hover: #1c1c1c;
+    --color-primary: #a3e635;
+    --color-primary-hover: #84cc16;
+    --color-primary-dim: rgba(163, 230, 53, 0.12);
+    --color-accent: #d9f99d;
+    --color-text: #f0f0f0;
+    --color-text-muted: #7a7a7a;
+    --color-text-dim: #525252;
+    --color-border: #262626;
+    --color-error: #f87171;
+    --color-warning: #fbbf24;
 
     --spacing-xs: 8px;
     --spacing-sm: 12px;
@@ -33,17 +35,22 @@
     --radius-md: 12px;
     --radius-lg: 16px;
 
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --glow-primary: 0 0 20px rgba(163, 230, 53, 0.15);
+    --glow-strong: 0 0 30px rgba(163, 230, 53, 0.25);
 
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, var(--color-bg) 0%, #1a1a1a 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--color-bg);
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(163, 230, 53, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(132, 204, 22, 0.03) 0%, transparent 50%);
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
@@ -68,13 +75,15 @@ body {
 
 .title {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--color-primary);
     margin-bottom: var(--spacing-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 40px rgba(163, 230, 53, 0.2);
 }
 
 .icon-sparkle {
@@ -95,7 +104,7 @@ body {
 
 /* ===== Drop Zone ===== */
 .drop-zone {
-    border: 3px dashed var(--color-border);
+    border: 2px dashed var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     background: var(--color-surface);
@@ -108,20 +117,38 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.drop-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--color-primary-dim) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.drop-zone:hover::before,
+.drop-zone.dragover::before {
+    opacity: 1;
 }
 
 .drop-zone:hover,
 .drop-zone.dragover {
     border-color: var(--color-primary);
     background: var(--color-surface-hover);
-    transform: scale(1.02);
-    box-shadow: var(--shadow-md);
+    transform: scale(1.01);
+    box-shadow: var(--glow-primary);
 }
 
 .drop-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     display: block;
     margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    opacity: 0.5;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -160,11 +187,12 @@ body {
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+    background: linear-gradient(90deg, var(--color-primary-hover), var(--color-primary), var(--color-accent));
     width: 0%;
     transition: width var(--transition-normal);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 12px rgba(163, 230, 53, 0.3);
 }
 
 .progress-bar::after {
@@ -207,10 +235,11 @@ body {
 /* ===== Log Area ===== */
 .log-area {
     display: none;
-    font-family: 'Courier New', monospace;
-    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.7rem;
     color: var(--color-text-dim);
-    background: #0a0a0a;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
     padding: var(--spacing-sm);
     border-radius: var(--radius-sm);
     max-height: 120px;
@@ -225,8 +254,9 @@ body {
 }
 
 .log-time {
-    color: var(--color-text-dim);
+    color: var(--color-primary-hover);
     margin-right: var(--spacing-xs);
+    opacity: 0.6;
 }
 
 .log-error {
@@ -245,6 +275,7 @@ body {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
     animation: slideUp 0.5s ease;
 }
 
@@ -310,7 +341,7 @@ body {
     left: 0;
     height: 100%;
     overflow: hidden;
-    border-right: 3px solid var(--color-primary);
+    border-right: 2px solid var(--color-primary);
 }
 
 .comparison-before {
@@ -359,22 +390,26 @@ body {
 
 .btn-primary {
     background: var(--color-primary);
-    color: #000;
+    color: #0a0a0a;
+    font-weight: 700;
 }
 
 .btn-primary:hover {
-    background: var(--color-primary-hover);
+    background: var(--color-accent);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--glow-strong);
 }
 
 .btn-secondary {
-    background: var(--color-border);
-    color: var(--color-text);
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-    background: #444;
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+    border-color: var(--color-text-dim);
     transform: translateY(-2px);
 }
 
@@ -459,6 +494,7 @@ body {
     text-align: center;
     padding-top: var(--spacing-lg);
     border-top: 1px solid var(--color-border);
+    opacity: 0.7;
 }
 
 .footer-text {

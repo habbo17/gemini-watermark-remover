@@ -11,8 +11,8 @@ chrome.action.onClicked.addListener(() => {
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
-    console.log('Gemini Watermark Remover installed successfully');
+    console.log('domara installed');
   } else if (details.reason === 'update') {
-    console.log(`Gemini Watermark Remover updated to version ${chrome.runtime.getManifest().version}`);
+    console.log(`domara updated to ${chrome.runtime.getManifest().version}`);
   }
 });

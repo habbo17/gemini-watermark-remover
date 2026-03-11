@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Gemini Watermark Remover",
+  "name": "domara",
   "version": "3.0.0",
-  "description": "Remove Gemini watermarks locally using AI - 100% privacy-focused, no data sent to servers",
+  "description": "Remove Gemini watermarks locally - instant, pixel-perfect, 100% private",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
   "action": {
-    "default_title": "Open Gemini Watermark Remover",
+    "default_title": "Open domara",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",

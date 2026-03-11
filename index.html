@@ -3,82 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Remove Gemini watermarks locally with AI - 100% privacy-focused">
-    <title>Gemini Watermark Remover - Local AI Processing</title>
+    <meta name="description" content="Remove Gemini watermarks locally - 100% private, instant processing">
+    <title>domara - Gemini Watermark Remover</title>
 
-    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
-            <h1 class="title">
-                <span class="icon-sparkle">&#10024;</span>
-                Gemini Watermark Remover
-            </h1>
+            <h1 class="title">domara</h1>
             <p class="subtitle">
-                100% Local Processing &bull; Privacy First &bull; Powered by AI
+                Gemini watermark remover &mdash; local &bull; instant &bull; pixel-perfect
             </p>
         </header>
 
-        <!-- Drop Zone -->
         <div class="drop-zone" id="dropZone">
-            <span class="drop-icon">&#128194;</span>
+            <span class="drop-icon">&darr;</span>
             <p class="drop-text">
-                Drop your image here<br>
+                Drop image here<br>
                 <span class="drop-subtext">or click to browse</span>
             </p>
             <input type="file" id="fileInput" accept="image/*" aria-label="Select image file">
         </div>
 
-        <!-- Progress Section -->
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
             <div class="progress-text" id="progressText">0%</div>
         </div>
 
-        <!-- Log Area -->
         <div class="log-area" id="logArea"></div>
 
-        <!-- Result Section -->
         <div class="result-area" id="resultArea">
-            <h2 class="result-title">Cleaned Image</h2>
+            <h2 class="result-title">Clean</h2>
 
-            <!-- Main Preview -->
             <div class="preview-container">
                 <img id="previewImg" class="preview-img" alt="Processed image">
             </div>
 
-            <!-- Comparison Slider -->
             <div class="comparison-container" id="comparisonContainer"></div>
 
-            <!-- Action Buttons -->
             <div class="action-buttons">
                 <a id="downloadLink" class="btn btn-primary" download>
-                    <span class="btn-icon">&#11015;&#65039;</span>
-                    Download Image
+                    Download
                 </a>
                 <button id="resetBtn" class="btn btn-secondary">
-                    <span class="btn-icon">&#128260;</span>
                     Process Another
                 </button>
             </div>
         </div>
 
-        <!-- Footer -->
         <footer class="footer">
-            <p class="footer-text">
-                Powered by <a href="https://github.com/advimman/lama" target="_blank" rel="noopener">LaMa AI</a>
-                and <a href="https://onnxruntime.ai/" target="_blank" rel="noopener">ONNX Runtime</a>
-            </p>
             <p class="footer-note">
-                Your images are processed entirely in your browser. No data is sent to any server.
+                Processed entirely in your browser. Nothing leaves your machine.
             </p>
         </footer>
     </div>
 
-    <!-- Application Script (ES6 Module) -->
     <script type="module" src="src/js/app.js"></script>
 </body>
 </html>
